@@ -16,6 +16,7 @@ parser.add_argument('--enable_loop_closure', type=str, default=None)
 parser.add_argument('--enable_mapping', action='store_true')
 parser.add_argument('--save_poses', type=str)
 parser.add_argument('--save_depths', type=str)
+parser.add_argument('--depth_scale', type=float, default=1000)
 
 opt = parser.parse_args()
 if opt.abs_resize is None:
@@ -37,7 +38,7 @@ if __name__ == '__main__':
     slam = VOLDOR_SLAM(mode=opt.mode)
 
     # set camera intrinsic
-    slam.set_cam_params(opt.fx,opt.fy,opt.cx,opt.cy,opt.bf, rescale=opt.resize)
+    slam.set_cam_params(opt.fx,opt.fy,opt.cx,opt.cy,opt.bf, rescale=opt.resize, depth_scale=opt.depth_scale)
     slam.voldor_user_config = f'--abs_resize_factor {opt.abs_resize}'
 
     # enable loop closure

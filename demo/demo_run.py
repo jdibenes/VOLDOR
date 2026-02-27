@@ -32,6 +32,8 @@ if __name__ == '__main__':
     set_save_pose = True
     set_enable_mapping = True
     set_enable_loop_closure = True    
+    set_png_depth = False
+    png_depth_scale = 1000
 
     sequence, fx_val, fy_val, cx_val, cy_val, bf_val, resize_val, abs_resize_val = big_table[sequence_index]
 
@@ -40,7 +42,7 @@ if __name__ == '__main__':
     voc_file = 'ORBvoc.bin'
     path_flow = os.path.join(path_base, sequence, f'flow_{toolset}')
     path_flow_2 = os.path.join(path_base, sequence, f'flow_2_{toolset}')
-    path_disp = os.path.join(path_base, sequence, f'disp_{toolset}')
+    path_disp = os.path.join(path_base, sequence, f'disp_{toolset}' if (not set_png_depth) else f'depth_{toolset}')
     path_img = os.path.join(path_base, sequence, 'img')
     fname_pose = os.path.join(pose_base, f'pose_{sequence}_{mode_name}_{toolset}.txt')
 
@@ -59,5 +61,6 @@ if __name__ == '__main__':
     resize = f'--resize {resize_val}'
     abs_resize = f'--abs_resize {abs_resize_val}'
     save_pose = f'--save_pose {fname_pose}' if (set_save_pose) else ''
+    depth_scale = f'--depth_scale {png_depth_scale}'
 
-    os.system(f'{cmd} {fx} {fy} {cx} {cy} {bf} {flow_dir} {img_dir} {disp_dir} {mode} {enable_mapping} {enable_loop_closure} {resize} {abs_resize} {save_pose}')
+    os.system(f'{cmd} {fx} {fy} {cx} {cy} {bf} {flow_dir} {img_dir} {disp_dir} {mode} {enable_mapping} {enable_loop_closure} {resize} {abs_resize} {save_pose} {depth_scale}')
