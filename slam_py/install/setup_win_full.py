@@ -8,16 +8,17 @@ import numpy
 import shutil
 
 # Change these folders
-opencv_include_dir = 'C:/opencv/build/include'
-ceres_include_dirs = ['C:/ceres-solver/include', \
-                        'C:/ceres-solver/config', \
-                        'C:/ceres-solver/eigen-3.3.9', \
-                        'C:/ceres-solver/glog/src/windows']
+opencv_include_dir = 'D:/jcds/SDK2/opencv_3_4_16/build/include'
+ceres_include_dirs = [
+    'D:/jcds/Documents/GitHub/vcpkg/packages/ceres_x64-windows/include',
+    'D:/jcds/Documents/GitHub/vcpkg/packages/eigen3_x64-windows/include/eigen3',
+    'D:/jcds/Documents/GitHub/vcpkg/packages/glog_x64-windows/include'
+]
 
-opencv_lib_dir = 'C:/opencv/build/x64/vc15/lib'
-ceres_lib_dirs = ['C:/ceres-solver/ceres-bin/lib/Release', 'C:/ceres-solver/glog/build/Release']
+opencv_lib_dir = 'D:/jcds/SDK2/opencv_3_4_16/build/x64/vc15/lib'
+ceres_lib_dirs = ['D:/jcds/Documents/GitHub/vcpkg/packages/ceres_x64-windows/lib', 'D:/jcds/Documents/GitHub/vcpkg/packages/glog_x64-windows/lib']
 
-opencv_lib_name = 'opencv_world3414'
+opencv_lib_name = 'opencv_world3416'
 ceres_lib_names = ['ceres', 'glog']
 
 # Change this if you target different host/device
@@ -39,7 +40,8 @@ ext = Extension('pyvoldor_full',
     library_dirs = ['./gpu-kernels.lib', opencv_lib_dir] + ceres_lib_dirs,
     libraries = ['gpu-kernels', opencv_lib_name] + ceres_lib_names,
     include_dirs = [numpy.get_include(), opencv_include_dir] + ceres_include_dirs,
-    define_macros = [('_CRT_NONSTDC_NO_DEPRECATE',''), ('CERES_USE_CXX_THREADS','')]
+    extra_compile_args = ['/std:c++17', '-MD'],
+    define_macros = [('_CRT_NONSTDC_NO_DEPRECATE',''), ('CERES_USE_CXX_THREADS',''), ('GLOG_USE_GLOG_EXPORT','')]
 )
 
 setup(
