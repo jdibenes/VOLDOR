@@ -288,3 +288,7 @@ demo/suitesparseconfig.dll
 /slam_py/install/.vscode
 /demo/poses
 slam_py/install/pyvoldor_full.cpp
+slam_py/install/pyvoldor_full.cp36-win_amd64.pyd
+slam_py/install/gpu-kernels.lib
+slam_py/install/gpu-kernels.exp
+slam_py/install/gpu-kernels.dll
