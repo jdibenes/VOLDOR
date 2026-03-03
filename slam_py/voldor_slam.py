@@ -305,7 +305,7 @@ class VOLDOR_SLAM:
                 disp = np.ascontiguousarray(disp)
             elif fn.endswith('.png'):
                 disp = cv2.imread(os.path.join(disp_path, fn), cv2.IMREAD_UNCHANGED)
-                disp = self.basefocal / (disp.astype(np.float32) / self.depth_scale)
+                disp = np.nan_to_num(self.basefocal / (disp.astype(np.float32) / self.depth_scale), nan=0, posinf=0, neginf=0)
             else:
                 raise f'Unsupported disparity format {fn}'
 
