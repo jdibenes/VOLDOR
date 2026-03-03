@@ -24,16 +24,17 @@ big_table = [
     ('hl2_6', 586.27075, 586.27075,  374.04108, 202.26265, 117.254150390625,  1.0, 1.0), # 19
     ('hl2_7', 586.27075, 586.27075,  374.04108, 202.26265, 117.254150390625,  1.0, 1.0), # 20
     ('hl2_5_2', 586.27075, 586.27075,  374.04108, 202.26265, 117.254150390625,  1.0, 1.0), # 21
+    ('zed_x_etna_1', 370.00048828125, 370.00048828125, 477.6654968261719, 270.8048095703125, 44.458960801608859567705078125, 1.0, 1.0) # 22
 ]
 
 if __name__ == '__main__':
     sequence_index = 18
-    toolset = 'gt'
+    toolset = 'waft'
     mode_name = 'stereo'
     set_save_pose = True
     set_enable_mapping = True
     set_enable_loop_closure = True    
-    set_png_depth = False
+    set_png_depth = True
     png_depth_scale = 1000
 
     sequence, fx_val, fy_val, cx_val, cy_val, bf_val, resize_val, abs_resize_val = big_table[sequence_index]
@@ -43,9 +44,10 @@ if __name__ == '__main__':
     voc_file = 'ORBvoc.bin'
     path_flow = os.path.join(path_base, sequence, f'flow_{toolset}')
     path_flow_2 = os.path.join(path_base, sequence, f'flow_2_{toolset}')
-    path_disp = os.path.join(path_base, sequence, f'disp_{toolset}' if (not set_png_depth) else f'depth_{toolset}')
+    path_disp = os.path.join(path_base, sequence, f'disp_{toolset}' if (not set_png_depth) else f'depth')
     path_img = os.path.join(path_base, sequence, 'img')
-    fname_pose = os.path.join(pose_base, f'pose_{sequence}_{mode_name}_{toolset}.txt')
+    pose_depth_suffix = f'disp' if (not set_png_depth) else f'depth'
+    fname_pose = os.path.join(pose_base, f'pose_{sequence}_{mode_name}_{toolset}_{pose_depth_suffix}.txt')
 
     cmd = 'C:/Users/jdibe/AppData/Local/Programs/Python/Python36/python.exe D:/jcds/Documents/GitHub/voldor/demo/demo.py'
     fx = f'--fx {fx_val}'
