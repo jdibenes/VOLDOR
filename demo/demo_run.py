@@ -29,7 +29,7 @@ big_table = [
 
 if __name__ == '__main__':
     sequence_index = 18
-    toolset = 'waft'
+    toolset = 'gt'
     mode_name = 'stereo'
     set_save_pose = True
     set_enable_mapping = True
@@ -39,17 +39,16 @@ if __name__ == '__main__':
 
     sequence, fx_val, fy_val, cx_val, cy_val, bf_val, resize_val, abs_resize_val = big_table[sequence_index]
 
-    path_base = './data'
+    path_base = '../../xvoldor/demo/data'
     pose_base = './poses'
     voc_file = 'ORBvoc.bin'
     path_flow = os.path.join(path_base, sequence, f'flow_{toolset}')
-    path_flow_2 = os.path.join(path_base, sequence, f'flow_2_{toolset}')
     path_disp = os.path.join(path_base, sequence, f'disp_{toolset}' if (not set_png_depth) else f'depth')
     path_img = os.path.join(path_base, sequence, 'img')
     pose_depth_suffix = f'disp' if (not set_png_depth) else f'depth'
     fname_pose = os.path.join(pose_base, f'pose_{sequence}_{mode_name}_{toolset}_{pose_depth_suffix}.txt')
 
-    cmd = 'C:/Users/jdibe/AppData/Local/Programs/Python/Python36/python.exe D:/jcds/Documents/GitHub/voldor/demo/demo.py'
+    cmd = 'C:/Users/jcds/AppData/Local/Programs/Python/Python36/python.exe C:/Users/jcds/Documents/GitHub/voldor/demo/demo.py'
     fx = f'--fx {fx_val}'
     fy = f'--fy {fy_val}'
     cx = f'--cx {cx_val}'
