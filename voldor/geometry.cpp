@@ -327,7 +327,7 @@ void estimate_camera_pose_epipolar(Mat flow, Camera& cam,
 	cam.E.convertTo(cam.E, CV_32F);
 	cam.R.convertTo(cam.R, CV_32F);
 	cam.t.convertTo(cam.t, CV_32F);
-	cam.t = cam.R*cam.t;
+	//cam.t = cam.R*cam.t;
 
 }
 
