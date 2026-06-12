@@ -30,7 +30,7 @@ big_table = [
 if __name__ == '__main__':
     sequence_index = 18
     toolset = 'gt'
-    mode_name = 'stereo'
+    mode_name = 'mono-scaled'
     set_save_pose = True
     set_enable_mapping = True
     set_enable_loop_closure = True    
