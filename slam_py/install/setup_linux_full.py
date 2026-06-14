@@ -13,7 +13,7 @@ nvcc_machine_code = '' #'-m64 -arch=compute_61 -code=sm_61'
 gpu_sources_cpp = ' '.join(glob('../../gpu-kernels/*.cpp'))
 gpu_sources_cu = ' '.join(glob('../../gpu-kernels/*.cu'))
 
-gpu_kernel_build_cmd = f'/usr/local/cuda/bin/nvcc --compiler-options "-shared -fPIC" {gpu_sources_cpp} {gpu_sources_cu} -lib -o libgpu-kernels.so -O3 {nvcc_machine_code}'
+gpu_kernel_build_cmd = f'nvcc -ccbin /home/jcds/miniconda3/envs/voldor/bin/x86_64-conda-linux-gnu-cc --compiler-options "-shared -fPIC" {gpu_sources_cpp} {gpu_sources_cu} -lib -o libgpu-kernels.so -O3 {nvcc_machine_code}'
 os.system(gpu_kernel_build_cmd)
 
 opencv_libs = subprocess.check_output('pkg-config --libs opencv'.split())
@@ -25,11 +25,12 @@ ext = Extension('pyvoldor_full',
             [x for x in glob('../../frame-alignment/*.cpp') if 'main.cpp' not in x] + \
             [x for x in glob('../../pose-graph/*.cpp') if 'main.cpp' not in x],
     language = 'c++',
-    library_dirs = ['.', '/usr/local/lib', '/usr/local/cuda/lib64'],
+    library_dirs = ['.', '/home/jcds/miniconda3/envs/voldor/lib'],
     libraries = ['gpu-kernels', 'cudart', 'ceres', 'glog', \
             'amd','btf','camd','ccolamd','cholmod','colamd','cxsparse',\
-            'graphblas','klu','ldl','rbio','spqr','umfpack', 'lapack', 'blas', 'gcc'] + opencv_libs,
-    include_dirs = [numpy.get_include()]+['/usr/include/eigen3']
+            'klu','ldl','rbio','spqr','umfpack', 'lapack', 'blas', 'gcc'] + opencv_libs,
+    include_dirs = [numpy.get_include()]+['/home/jcds/miniconda3/envs/voldor/include/eigen3'],
+    define_macros = [('GLOG_USE_GLOG_EXPORT','')]
 )
 
 setup(
