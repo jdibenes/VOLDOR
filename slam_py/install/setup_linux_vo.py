@@ -23,7 +23,7 @@ ext = Extension('pyvoldor_vo',
     sources = ['pyvoldor_vo.pyx'] + \
             [x for x in glob('../../voldor/*.cpp') if 'main.cpp' not in x],
     language = 'c++',
-    library_dirs = ['.', '/usr/local/lib', '/usr/local/cuda/lib64'],
+    library_dirs = ['.', '/home/jcds/miniconda3/envs/voldor/lib'],
     libraries = ['gpu-kernels', 'cudart'] + opencv_libs,
     include_dirs = [numpy.get_include()]
 )
