@@ -30,10 +30,10 @@ big_table = [
 if __name__ == '__main__':
     sequence_index = 18
     toolset = 'gt'
-    mode_name = 'mono-scaled'
+    mode_name = 'stereo'
     set_save_pose = True
     set_enable_mapping = True
-    set_enable_loop_closure = True    
+    set_enable_loop_closure = False    
     set_png_depth = True
     png_depth_scale = 1000
 
@@ -48,7 +48,8 @@ if __name__ == '__main__':
     pose_depth_suffix = f'disp' if (not set_png_depth) else f'depth'
     fname_pose = os.path.join(pose_base, f'pose_{sequence}_{mode_name}_{toolset}_{pose_depth_suffix}.txt')
 
-    cmd = 'C:/Users/jcds/AppData/Local/Programs/Python/Python36/python.exe C:/Users/jcds/Documents/GitHub/voldor/demo/demo.py'
+    #cmd = 'C:/Users/jcds/AppData/Local/Programs/Python/Python36/python.exe C:/Users/jcds/Documents/GitHub/voldor/demo/demo.py'
+    cmd = 'python demo.py'
     fx = f'--fx {fx_val}'
     fy = f'--fy {fy_val}'
     cx = f'--cx {cx_val}'
